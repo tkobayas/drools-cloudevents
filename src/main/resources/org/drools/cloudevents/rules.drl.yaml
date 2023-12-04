@@ -1,0 +1,11 @@
+
+name: org.drools.cloudevents
+rules:
+- name: will execute per each Measurement having ID color
+  when:
+  - given: java.util.Map
+    having:
+    - "get(\"id\") == \"color\""
+    - "$colorVal : get(\"val\")"
+  then: |
+    results.add($colorVal);

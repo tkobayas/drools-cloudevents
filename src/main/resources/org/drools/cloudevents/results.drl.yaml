@@ -1,0 +1,5 @@
+
+name: org.drools.cloudevents
+globals:
+- type: java.util.List
+  id: results
