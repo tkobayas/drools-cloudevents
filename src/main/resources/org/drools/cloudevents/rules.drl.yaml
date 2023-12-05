@@ -8,4 +8,4 @@ rules:
     - "get(\"id\") == \"color\""
     - "$colorVal : get(\"val\")"
   then: |
-    results.add($colorVal);
+    results.put("color", $colorVal);

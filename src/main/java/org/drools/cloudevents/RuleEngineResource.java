@@ -1,6 +1,7 @@
 package org.drools.cloudevents;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -44,10 +45,13 @@ public class RuleEngineResource {
         }
 
         KieSession ksession = runtimeBuilder.newKieSession();
-        List<String> results = new ArrayList<>();
+        Map<String, Object> results = new HashMap<>();
         ksession.setGlobal("results", results);
 
         Map<String, Object> map = readValueAsMapOfStringAndObject(new String(event.getData().toBytes()));
+
+        System.out.println(map);
+
         ksession.insert(map);
         ksession.fireAllRules();
 

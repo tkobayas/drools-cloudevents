@@ -58,7 +58,7 @@ curl -v http://localhost:8080/drools/evaluate \
                 .post("/drools/evaluate")
                 .then()
                 .statusCode(200)
-                .body(equalTo("[\"red\"]"));
+                .body(equalTo("{\"color\":\"red\"}"));
     }
 
     private Map<String, Object> getHeaders(CloudEvent cloudEvent) {
