@@ -3,9 +3,9 @@ name: org.drools.cloudevents
 rules:
 - name: will execute per each Measurement having ID color
   when:
-  - given: java.util.Map
+  - given: fact.Measurement
+    as: $m
     having:
-    - "get(\"id\") == \"color\""
-    - "$colorVal : get(\"val\")"
+    - "id == \"color\""
   then: |
-    results.put("color", $colorVal);
+    results.put("color", $m.val);

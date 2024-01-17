@@ -5,7 +5,7 @@ import java.net.URI;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.MediaType;
 
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonFactory;
@@ -16,11 +16,9 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import io.cloudevents.CloudEvent;
 import io.cloudevents.core.builder.CloudEventBuilder;
 import io.cloudevents.core.data.PojoCloudEventData;
-import org.drools.base.facttemplates.Fact;
-import org.drools.model.PrototypeFact;
-import org.drools.model.PrototypeFactFactory;
+import org.kie.api.prototype.PrototypeFactInstance;
 
-import static org.drools.model.PrototypeDSL.prototype;
+import static org.kie.api.prototype.PrototypeBuilder.prototype;
 
 public class JsonUtil {
 
@@ -48,7 +46,7 @@ public class JsonUtil {
 
         return CloudEventBuilder.v1()
                 .withSource(URI.create("example"))
-                .withType(data.getClass().getCanonicalName())
+                .withType("fact." + data.getClass().getSimpleName())
                 .withId(UUID.randomUUID().toString())
                 .withDataContentType(MediaType.APPLICATION_JSON)
                 .withData(dataEvent)
@@ -63,8 +61,10 @@ public class JsonUtil {
         }
     }
 
-    public static PrototypeFact cloudEventToPrototypeFact(CloudEvent cloudEvent) {
+    public static PrototypeFactInstance cloudEventToPrototypeFact(CloudEvent cloudEvent) {
         Map<String, Object> map = readValueAsMapOfStringAndObject(new String(cloudEvent.getData().toBytes()));
-        return PrototypeFactFactory.get().createMapBasedFact(prototype(cloudEvent.getType()), map);
+        PrototypeFactInstance fact = prototype(cloudEvent.getType()).asFact().newInstance();
+        map.forEach(fact::put);
+        return fact;
     }
 }

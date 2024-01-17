@@ -28,10 +28,10 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.release>11</maven.compiler.release>
-    <drools-version>8.45.0-SNAPSHOT</drools-version>
+    <maven.compiler.release>17</maven.compiler.release>
+    <drools-version>999-SNAPSHOT</drools-version>
     <cloudevents-version>2.5.0</cloudevents-version>
-    <quarkus-version>2.16.12.Final</quarkus-version>
+    <quarkus-version>3.2.9.Final</quarkus-version>
 
     <slf4j-version>1.7.30</slf4j-version>
     <junit-version>4.13.1</junit-version>
@@ -74,11 +74,11 @@
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-resteasy-jackson</artifactId>
+      <artifactId>quarkus-resteasy</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-rest-client</artifactId>
+      <artifactId>quarkus-resteasy-jackson</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -92,7 +92,7 @@
     </dependency>
     <dependency>
       <groupId>io.cloudevents</groupId>
-      <artifactId>cloudevents-http-restful-ws</artifactId>
+      <artifactId>cloudevents-http-restful-ws-jakarta</artifactId>
       <version>${cloudevents-version}</version>
     </dependency>
     <dependency>
@@ -135,8 +135,6 @@
         <executions>
           <execution>
             <goals>
-              <goal>prepare</goal>
-              <goal>prepare-tests</goal>
               <goal>build</goal>
             </goals>
           </execution>
