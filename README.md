@@ -35,6 +35,7 @@ You should get a response:
 docker run -d -p 5000:5000 --name registry registry:2
 ```
 For simplicity, the steps run the registry without any authentication. For production, you should secure the registry.
+
 2. Edit application.properties. For example:
 ```properties
 quarkus.container-image.build=true
@@ -48,14 +49,17 @@ quarkus.container-image.tag=latest
 drools.prototypes=allowed
 ```
 You may change `quarkus.container-image.group` and `quarkus.container-image.name` as you like.
+
 3. Build and push the image
 ```sh
 mvn clean package -Dquarkus.container-image.push=true
 ```
+
 4. Run the registered image
 ```sh
 docker run -d -p 8080:8080 localhost:5000/my-private-group/drools-cloudevents:latest
 ```
+
 5. Test the service with the same curl command as described in "Running the example".
 
 ## Push the image to a public container registry (Docker Hub for example)
@@ -64,10 +68,11 @@ docker run -d -p 8080:8080 localhost:5000/my-private-group/drools-cloudevents:la
 docker login -u your_username -p your_password
 ```
 It will store the credentials in `~/.docker/config.json` so that the maven build can use it.
+
 2. Edit application.properties. For example:
 ```properties
 quarkus.container-image.build=true
-quarkus.container-image.push=true
+quarkus.container-image.push=false
 quarkus.container-image.registry=docker.io
 quarkus.container-image.group=your_username
 quarkus.container-image.name=drools-cloudevents
@@ -76,14 +81,15 @@ quarkus.container-image.tag=latest
 drools.prototypes=allowed
 ```
 `quarkus.container-image.group` has to be the same your docker hub username. You may change `quarkus.container-image.name` as you like.
+
 3. Build and push the image
 ```sh
 mvn clean package -Dquarkus.container-image.push=true
 ```
-5. Run the registered image
+4. Run the registered image
 ```sh
 docker run -d -p 8080:8080 your_username/drools-cloudevents:latest
 ```
-6. Test the service with the same curl command as described in "Running the example".
+5. Test the service with the same curl command as described in "Running the example".
 
 **Note that the rule is built in the immutable image, so you will need to rebuild and push the image if you update the rule.**
