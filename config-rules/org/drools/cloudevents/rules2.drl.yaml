@@ -1,0 +1,11 @@
+
+name: org.drools.cloudevents
+rules:
+- name: configured rule
+  when:
+  - given: fact.Measurement
+    as: $m
+    having:
+    - "id == \"color\""
+  then: |
+    results.put("configured rule result", $m.val + "!!");

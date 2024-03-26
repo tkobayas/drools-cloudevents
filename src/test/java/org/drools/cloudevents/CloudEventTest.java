@@ -31,7 +31,7 @@ import static org.drools.cloudevents.JsonUtil.createEvent;
 import static org.hamcrest.Matchers.equalTo;
 
 @QuarkusTest
-public class CloudEventIT {
+public class CloudEventTest {
 
 /*
 curl -v http://localhost:8080/drools/evaluate \
