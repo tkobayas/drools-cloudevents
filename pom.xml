@@ -36,11 +36,11 @@
   <dependencies>
     <dependency>
       <groupId>org.drools</groupId>
-      <artifactId>drools-drlonyaml-todrl</artifactId>
+      <artifactId>drools-engine</artifactId>
     </dependency>
     <dependency>
       <groupId>org.drools</groupId>
-      <artifactId>drools-quarkus</artifactId>
+      <artifactId>drools-drlonyaml-todrl</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
